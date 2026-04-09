@@ -10,34 +10,34 @@ import { BasePlayer } from '../../player/BasePlayer';
 
 const BUTTONS = [
     {
-        title: 'Power',
-        code: KeyEvent.KEYCODE_POWER,
-        icon: SvgImage.Icon.POWER,
-    },
-    {
-        title: 'Volume up',
-        code: KeyEvent.KEYCODE_VOLUME_UP,
-        icon: SvgImage.Icon.VOLUME_UP,
-    },
-    {
-        title: 'Volume down',
-        code: KeyEvent.KEYCODE_VOLUME_DOWN,
-        icon: SvgImage.Icon.VOLUME_DOWN,
-    },
-    {
-        title: 'Back',
+        title: '返回',
         code: KeyEvent.KEYCODE_BACK,
         icon: SvgImage.Icon.BACK,
     },
     {
-        title: 'Home',
+        title: '主页',
         code: KeyEvent.KEYCODE_HOME,
         icon: SvgImage.Icon.HOME,
     },
     {
-        title: 'Overview',
+        title: '任务视图',
         code: KeyEvent.KEYCODE_APP_SWITCH,
         icon: SvgImage.Icon.OVERVIEW,
+    },
+    {
+        title: '电源',
+        code: KeyEvent.KEYCODE_POWER,
+        icon: SvgImage.Icon.POWER,
+    },
+    {
+        title: '音量 +',
+        code: KeyEvent.KEYCODE_VOLUME_UP,
+        icon: SvgImage.Icon.VOLUME_UP,
+    },
+    {
+        title: '音量 -',
+        code: KeyEvent.KEYCODE_VOLUME_DOWN,
+        icon: SvgImage.Icon.VOLUME_DOWN,
     },
 ];
 
@@ -75,7 +75,7 @@ export class GoogToolBox extends ToolBox {
             return button;
         });
         if (player.supportsScreenshot) {
-            const screenshot = new ToolBoxButton('Take screenshot', SvgImage.Icon.CAMERA);
+            const screenshot = new ToolBoxButton('截图', SvgImage.Icon.CAMERA);
             screenshot.addEventListener('click', () => {
                 player.createScreenshot(client.getDeviceName());
             });
@@ -83,7 +83,7 @@ export class GoogToolBox extends ToolBox {
         }
 
         const keyboard = new ToolBoxCheckbox(
-            'Capture keyboard',
+            '接管键盘',
             SvgImage.Icon.KEYBOARD,
             `capture_keyboard_${udid}_${playerName}`,
         );
@@ -96,7 +96,7 @@ export class GoogToolBox extends ToolBox {
         if (moreBox) {
             const displayId = player.getVideoSettings().displayId;
             const id = `show_more_${udid}_${playerName}_${displayId}`;
-            const more = new ToolBoxCheckbox('More', SvgImage.Icon.MORE, id);
+            const more = new ToolBoxCheckbox('更多', SvgImage.Icon.MORE, id);
             more.addEventListener('click', (_, el) => {
                 const element = el.getElement();
                 moreBox.style.display = element.checked ? 'block' : 'none';

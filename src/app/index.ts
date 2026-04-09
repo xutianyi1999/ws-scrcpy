@@ -7,6 +7,15 @@ window.onload = async function (): Promise<void> {
     const hash = location.hash.replace(/^#!/, '');
     const parsedQuery = new URLSearchParams(hash);
     const action = parsedQuery.get('action');
+    const embedMode = parsedQuery.get('embed');
+    const embedded = embedMode === '1' || embedMode === 'lexifact';
+
+    if (embedded) {
+        document.body.classList.add('embedded');
+        if (embedMode === 'lexifact') {
+            document.body.classList.add('embedded-lexifact');
+        }
+    }
 
     /// #if USE_BROADWAY
     const { BroadwayPlayer } = await import('./player/BroadwayPlayer');

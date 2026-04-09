@@ -11,6 +11,16 @@
     padding: 0 .714rem .714rem .714rem;
 }
 
+body.embedded.stream .more-box {
+    top: 0.75rem;
+    right: 4.15rem;
+    border: 1px solid hsla(215, 25%, 27%, 0.9);
+    border-radius: 0.75rem;
+    background: hsla(221, 39%, 11%, 0.9);
+    box-shadow: 0 10px 30px rgba(2, 6, 23, 0.45);
+    backdrop-filter: blur(4px);
+}
+
 .text-with-shadow, .more-box label {
     color: var(--text-color);
     text-shadow: var(--text-shadow-color) 0 0 .357rem;

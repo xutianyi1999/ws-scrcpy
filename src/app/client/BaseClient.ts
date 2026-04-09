@@ -35,6 +35,10 @@ export class BaseClient<P extends ParamsBase, TE extends EventMap> extends Typed
     }
 
     public setBodyClass(text: string): void {
-        document.body.className = text;
+        const body = document.body;
+        const preserved = ['embedded', 'embedded-lexifact'].filter((name) => body.classList.contains(name));
+        body.className = '';
+        preserved.forEach((name) => body.classList.add(name));
+        body.classList.add(text);
     }
 }
