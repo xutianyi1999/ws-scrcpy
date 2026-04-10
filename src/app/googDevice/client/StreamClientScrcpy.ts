@@ -46,6 +46,7 @@ export class StreamClientScrcpy
     implements KeyEventListener, InteractionHandlerListener
 {
     public static ACTION = 'stream';
+    private static readonly TOOLBAR_COLLAPSE_KEY_PREFIX = 'ws-scrcpy::toolbar-collapsed::';
     private static players: Map<string, PlayerClass> = new Map<string, PlayerClass>();
 
     private controlButtons?: HTMLElement;
@@ -317,6 +318,7 @@ export class StreamClientScrcpy
         googMoreBox.setOnStop(stop);
         const googToolBox = GoogToolBox.createToolBox(udid, player, this, moreBox);
         this.controlButtons = googToolBox.getHolderElement();
+        this.attachToolbarToggle(deviceView, udid);
         deviceView.appendChild(this.controlButtons);
         const video = document.createElement('div');
         video.className = 'video';
@@ -345,6 +347,30 @@ export class StreamClientScrcpy
         streamReceiver.on('displayInfo', this.onDisplayInfo);
         streamReceiver.on('disconnected', this.onDisconnected);
         console.log(TAG, player.getName(), udid);
+    }
+
+    private attachToolbarToggle(deviceView: HTMLElement, udid: string): void {
+        if (!this.controlButtons) {
+            return;
+        }
+        const storageKey = `${StreamClientScrcpy.TOOLBAR_COLLAPSE_KEY_PREFIX}${udid}`;
+        const collapsed = localStorage.getItem(storageKey) === '1';
+        if (collapsed) {
+            deviceView.classList.add('toolbar-collapsed');
+        }
+
+        const toggleButton = document.createElement('button');
+        toggleButton.className = 'control-button toolbar-toggle-button';
+        toggleButton.type = 'button';
+        toggleButton.title = collapsed ? '展开按钮栏' : '收起按钮栏';
+        toggleButton.innerText = collapsed ? '›' : '‹';
+        toggleButton.onclick = () => {
+            const isCollapsed = deviceView.classList.toggle('toolbar-collapsed');
+            toggleButton.title = isCollapsed ? '展开按钮栏' : '收起按钮栏';
+            toggleButton.innerText = isCollapsed ? '›' : '‹';
+            localStorage.setItem(storageKey, isCollapsed ? '1' : '0');
+        };
+        this.controlButtons.insertBefore(toggleButton, this.controlButtons.firstChild);
     }
 
     public sendMessage(message: ControlMessage): void {
@@ -431,7 +457,7 @@ export class StreamClientScrcpy
                     id="${configureButtonId}"
                     class="active action-button"
                 >
-                    Configure stream
+                    配置投屏
                 </button>
             </div>`;
             const a = e.content.getElementById(configureButtonId);

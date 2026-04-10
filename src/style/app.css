@@ -105,6 +105,7 @@ body.stream {
     z-index: 1;
     float: right;
     display: inline-block;
+    position: relative;
 }
 
 .video-layer {
@@ -129,6 +130,8 @@ body.stream {
     float: right;
     width: 3.715rem;
     background-color: var(--control-buttons-bg-color);
+    transition: width 180ms ease;
+    overflow: hidden;
 }
 
 .control-button {
@@ -143,6 +146,35 @@ body.stream {
 
 .control-button:hover {
     opacity: 1;
+}
+
+.toolbar-toggle-button {
+    margin: .357rem .786rem .25rem;
+    color: var(--text-color-light);
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    border-radius: 999px;
+}
+
+.toolbar-toggle-button:hover {
+    color: var(--text-color);
+    background-color: var(--controls-bg-color);
+}
+
+.device-view.toolbar-collapsed .control-buttons-list {
+    width: 1.55rem;
+}
+
+.device-view.toolbar-collapsed .control-button {
+    margin: .357rem auto;
+}
+
+.device-view.toolbar-collapsed .control-button:not(.toolbar-toggle-button),
+.device-view.toolbar-collapsed .control-wrapper > input[type=checkbox],
+.device-view.toolbar-collapsed .control-wrapper > label:not(.toolbar-toggle-button) {
+    display: none;
 }
 
 .control-wrapper > input[type=checkbox] {

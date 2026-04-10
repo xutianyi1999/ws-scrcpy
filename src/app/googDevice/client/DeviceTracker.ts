@@ -30,6 +30,14 @@ const DESC_COLUMNS: DescriptionColumn[] = [
     },
 ];
 
+function getDeviceStateLabel(state: string): string {
+    return state === DeviceState.DEVICE ? '在线' : '离线';
+}
+
+function getDeviceStateClassName(state: string): string {
+    return state === DeviceState.DEVICE ? 'is-online' : 'is-offline';
+}
+
 export class DeviceTracker extends BaseDeviceTracker<GoogDeviceDescriptor, never> {
     public static readonly ACTION = ACTION.GOOG_DEVICE_LIST;
     public static readonly CREATE_DIRECT_LINKS = true;
@@ -186,7 +194,10 @@ export class DeviceTracker extends BaseDeviceTracker<GoogDeviceDescriptor, never
                     <div class="release-version">${device['ro.build.version.release']}</div>
                     <div class="sdk-version">${device['ro.build.version.sdk']}</div>
                 </div>
-                <div class="device-state" title="State: ${device.state}"></div>
+                <div
+                    class="device-state ${getDeviceStateClassName(device.state)}"
+                    title="State: ${device.state}"
+                >${getDeviceStateLabel(device.state)}</div>
             </div>
             <div id="${servicesId}" class="services"></div>
         </div>`.content;
