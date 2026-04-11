@@ -2,3 +2,6 @@
 /dist
 /build
 /.idea
+
+# graphify outputs (may be generated under any subfolder)
+**/graphify-out/
