@@ -80,6 +80,99 @@ body.shell {
 
 body.stream {
     background-color: var(--stream-bg-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    min-height: 100dvh;
+}
+
+/* Flex layout replaces legacy floats — fixes iframe / 窄栏下灰块与错位 */
+body.stream .device-view {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: stretch;
+    float: none;
+}
+
+body.stream .control-buttons-list {
+    float: none;
+    flex: 0 0 auto;
+    width: 3.5rem;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.35rem 0;
+    gap: 0.2rem;
+    border-left: 1px solid rgba(15, 23, 42, 0.1);
+    box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.45);
+}
+
+body.stream .control-button {
+    margin: 0.2rem 0;
+    border-radius: 0.5rem;
+    opacity: 0.88;
+    transition: opacity 120ms ease, background-color 120ms ease, transform 120ms ease;
+}
+
+body.stream .control-button:hover {
+    opacity: 1;
+    transform: scale(1.04);
+}
+
+body.stream .video {
+    float: none;
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    max-width: 100%;
+    max-height: 100%;
+    background-color: #000000;
+}
+
+body.stream .device-view.toolbar-collapsed .control-buttons-list {
+    width: 1.55rem;
+}
+
+/* LexiFact iframe：画面在容器内等比居中，避免大块灰底与触控错位 */
+body.stream-embed .video-layer {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain;
+}
+
+body.stream-embed .touch-layer {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto !important;
+    height: auto !important;
+    touch-action: none;
+}
+
+body.stream-embed .control-buttons-list {
+    background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+}
+
+body.stream-embed .video {
+    background: radial-gradient(ellipse at center, #1e293b 0%, #0f172a 72%);
 }
 
 .terminal-container {

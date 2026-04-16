@@ -144,7 +144,7 @@ export class StreamClientScrcpy
 
         const { udid, player: playerName } = this.params;
         this.startStream({ udid, player, playerName, fitToScreen, videoSettings });
-        this.setBodyClass('stream');
+        this.setBodyClass(params.embed ? 'stream stream-embed' : 'stream');
     }
 
     public static parseParameters(params: URLSearchParams): ParamsStreamScrcpy {
@@ -153,12 +153,14 @@ export class StreamClientScrcpy
         if (action !== ACTION.STREAM_SCRCPY) {
             throw Error('Incorrect action');
         }
+        const embed = params.get('embed')?.trim();
         return {
             ...typedParams,
             action,
             player: Util.parseString(params, 'player', true),
             udid: Util.parseString(params, 'udid', true),
             ws: Util.parseString(params, 'ws', true),
+            ...(embed ? { embed } : {}),
         };
     }
 

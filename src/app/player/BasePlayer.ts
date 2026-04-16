@@ -386,8 +386,42 @@ export abstract class BasePlayer extends TypedEmitter<PlayerEvents> {
         this.touchableCanvas.width = width;
         this.touchableCanvas.height = height;
         if (this.parentElement) {
-            this.parentElement.style.height = `${height}px`;
-            this.parentElement.style.width = `${width}px`;
+            const embed =
+                typeof document !== 'undefined' && document.body.classList.contains('stream-embed');
+            if (embed) {
+                this.parentElement.style.width = '100%';
+                this.parentElement.style.height = '100%';
+                this.parentElement.style.boxSizing = 'border-box';
+                this.parentElement.style.maxWidth = '100%';
+                this.parentElement.style.maxHeight = '100%';
+                this.touchableCanvas.style.maxWidth = '100%';
+                this.touchableCanvas.style.maxHeight = '100%';
+                this.touchableCanvas.style.width = 'auto';
+                this.touchableCanvas.style.height = 'auto';
+                this.tag.style.maxWidth = '100%';
+                this.tag.style.maxHeight = '100%';
+                this.tag.style.width = 'auto';
+                this.tag.style.height = 'auto';
+                if (this.tag instanceof HTMLVideoElement) {
+                    this.tag.style.objectFit = 'contain';
+                }
+            } else {
+                this.parentElement.style.height = `${height}px`;
+                this.parentElement.style.width = `${width}px`;
+                this.parentElement.style.maxWidth = '';
+                this.parentElement.style.maxHeight = '';
+                this.touchableCanvas.style.maxWidth = '';
+                this.touchableCanvas.style.maxHeight = '';
+                this.touchableCanvas.style.width = '';
+                this.touchableCanvas.style.height = '';
+                this.tag.style.maxWidth = '';
+                this.tag.style.maxHeight = '';
+                this.tag.style.width = '';
+                this.tag.style.height = '';
+                if (this.tag instanceof HTMLVideoElement) {
+                    this.tag.style.objectFit = '';
+                }
+            }
         }
         const size = new Size(width, height);
         this.emit('video-view-resize', size);
