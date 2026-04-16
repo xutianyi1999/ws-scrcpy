@@ -53,6 +53,11 @@
 
 html {
     font-size: var(--font-size);
+    height: 100%;
+}
+
+html.stream-embed {
+    height: 100%;
 }
 
 a {
@@ -144,26 +149,36 @@ body.stream .device-view.toolbar-collapsed .control-buttons-list {
     width: 1.55rem;
 }
 
-/* LexiFact iframe：画面在容器内等比居中，避免大块灰底与触控错位 */
+/*
+ * LexiFact iframe：video/canvas 铺满 .video，等比缩放发生在元素内部（object-fit: contain），
+ * 避免「画面一小块 + 外圈一大圈浅底」的双重留白。
+ */
 body.stream-embed .video-layer {
-    position: absolute;
-    inset: 0;
-    margin: auto;
-    max-width: 100%;
-    max-height: 100%;
-    width: auto !important;
-    height: auto !important;
+    position: absolute !important;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
     object-fit: contain;
+    object-position: center center;
 }
 
 body.stream-embed .touch-layer {
-    position: absolute;
-    inset: 0;
-    margin: auto;
-    max-width: 100%;
-    max-height: 100%;
-    width: auto !important;
-    height: auto !important;
+    position: absolute !important;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
     touch-action: none;
 }
 
@@ -177,6 +192,9 @@ body.stream-embed {
 }
 
 body.stream-embed .control-buttons-list {
+    width: 3rem;
+    padding: 0.25rem 0;
+    gap: 0.15rem;
     background: #ffffff;
     border-left: 1px solid #e2e8f0;
     box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.8);
