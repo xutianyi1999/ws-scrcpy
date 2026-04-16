@@ -167,7 +167,7 @@ body.stream-embed .touch-layer {
     touch-action: none;
 }
 
-/* 与 LexiFact 右栏一致：slate-50 底、白侧栏、画面区 slate-900（与 iframe 外框同色，减轻「黑条割裂」） */
+/* 与 LexiFact 右栏一致：浅底 + 白侧栏；画面区 letterbox 用 slate-100，避免嵌入时一块「深色洞」 */
 body.stream-embed {
     background-color: #f8fafc;
     color: #0f172a;
@@ -201,8 +201,7 @@ body.stream-embed .toolbar-toggle-button:hover {
 }
 
 body.stream-embed .video {
-    /* 与 Tailwind bg-slate-900 一致，略浅于纯黑，与侧栏白底对比更柔和 */
-    background: #0f172a;
+    background: #f1f5f9;
 }
 
 .terminal-container {
