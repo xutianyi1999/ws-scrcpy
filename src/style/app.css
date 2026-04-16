@@ -167,12 +167,42 @@ body.stream-embed .touch-layer {
     touch-action: none;
 }
 
+/* 与 LexiFact 右栏一致：slate-50 底、白侧栏、画面区 slate-900（与 iframe 外框同色，减轻「黑条割裂」） */
+body.stream-embed {
+    background-color: #f8fafc;
+    color: #0f172a;
+    --stream-bg-color: #f8fafc;
+    --control-buttons-bg-color: #ffffff;
+    --svg-button-fill: #475569;
+}
+
 body.stream-embed .control-buttons-list {
-    background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+    background: #ffffff;
+    border-left: 1px solid #e2e8f0;
+    box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.8);
+}
+
+body.stream-embed .control-button {
+    background-color: #ffffff;
+}
+
+body.stream-embed .control-button:hover {
+    background-color: #f8fafc;
+}
+
+body.stream-embed .toolbar-toggle-button {
+    color: #64748b;
+    background-color: transparent;
+}
+
+body.stream-embed .toolbar-toggle-button:hover {
+    color: #0f172a;
+    background-color: #f1f5f9;
 }
 
 body.stream-embed .video {
-    background: radial-gradient(ellipse at center, #1e293b 0%, #0f172a 72%);
+    /* 与 Tailwind bg-slate-900 一致，略浅于纯黑，与侧栏白底对比更柔和 */
+    background: #0f172a;
 }
 
 .terminal-container {
